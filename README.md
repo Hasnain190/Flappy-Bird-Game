@@ -7,6 +7,7 @@ A Flappy Bird Game
 To install game , make sure to have node installed in your computer.
 Check google for more info
 
+1. download the repo
 1. `cd Flappy-Bird`
 1. `npm install`
 1. `npm run dev`
