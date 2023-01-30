@@ -88,7 +88,7 @@ function create(this: Phaser.Scene) {
     color: "#0000",
   });
   // Collide the bird with the platform
-  this.physics.add.collider(bird, movingGround);
+  // this.physics.add.collider(bird, movingGround);
   this.physics.add.collider(bird, obstacles);
   console.log(bird);
 }
@@ -108,25 +108,25 @@ function update(this: Phaser.Scene) {
     bird.setVelocityY(-330);
   }
 
-  obstacles.children.iterate(function (obstacle) {
+  obstacles.children.iterate(function (obstacle: { x: number; destroy: () => void; }) {
     if (obstacle.x > game.config.width) {
       obstacle.destroy();
     }
     // console.log(obstacle);
 
-    obstacle.x -= 0.25;
+    obstacle.x -= 0.55;
   });
 
   if (game.getTime() > nextSpawn) {
     let obstacle = obstacles
-      .create(Math.random() * 200 + 700, 600, "ground")
       .setOrigin(1, 1)
+      .create(800, 600, "ground")
       .setScale(0.1, Math.random() * 10);
 
     obstacle.body.velocity.x = 10;
 
     // randomly schedule the next obstacle spawn, which will happen between 0 to 1 seconds after the current time.
-    nextSpawn = game.getTime() + Math.random() * 2000;
+    nextSpawn = game.getTime() + (Math.random() * 4000) + 1000;
   }
   // console.log(nextSpawn);
 }
